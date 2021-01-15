@@ -1,0 +1,13 @@
+.DS_Store
+build/
+target/
+*.iml
+*.pyc
+.cache/
+.idea/
+.janala/
+*.log
+*.swp
+*-results/
+.java-version
+*.jar
