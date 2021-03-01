@@ -21,7 +21,11 @@
             <version>2.2</version>
             <scope>test</scope>
         </dependency>
-
+        <dependency>
+            <groupId>org.ow2.asm</groupId>
+            <artifactId>asm</artifactId>
+            <version>9.0</version>
+        </dependency>
     </dependencies>
 
     <build>
@@ -31,7 +35,7 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.7.0</version>
                 <configuration>
-                    <release>12</release>
+                    <release>11</release>
                 </configuration>
             </plugin>
             <plugin>

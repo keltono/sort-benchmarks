@@ -89,6 +89,7 @@ public class SortTest {
     }
 
     public static <T extends Comparable<T>> void testSort(SortAlgorithm algorithm, List<T> input) {
+        System.out.println("\nStarting a Test!\n");
         List<T> output = algorithm.sort(input);
         int n = input.size();
         // Check length
