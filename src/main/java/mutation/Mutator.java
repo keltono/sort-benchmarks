@@ -87,8 +87,8 @@ public enum Mutator {
             new InstructionCall(Opcodes.ARETURN)),
     //Swap increments (INCREMENTS):
     IINC_SWAP(Opcodes.IINC, null, new InstructionCall(Opcodes.NOP)), //More symbolic
-    //Remove void calls (VOID_METHOD_CALLS) //TODO fix
-    VOID_REMOVE(Opcodes.INVOKESTATIC, "V", new InstructionCall(Opcodes.NOP)), //TODO not working! //special case - symbolic
+    //Remove void calls (VOID_METHOD_CALLS) //TODO could be a different invoke
+    VOID_REMOVE(Opcodes.INVOKESTATIC, "V", new InstructionCall(Opcodes.NOP)),
     //Return empty object (EMPTY_RETURNS)
     I_ARETURN_TO_EMPTY(Opcodes.ARETURN, "Ljava/lang/Integer;", new InstructionCall(Opcodes.POP),
             new InstructionCall(Opcodes.ICONST_0),

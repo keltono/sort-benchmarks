@@ -77,9 +77,6 @@ public class Counter {
                     @Override
                     public void visitInsn(int opcode) {
                         if (opcode == mm.toReplace() && (mm.returnType() == null || signature.contains(")" + mm.returnType()))) {
-                            if(mm == Mutator.IRETURN_TO_FALSE) {
-                                System.out.println(name + ", " + signature + ", " + superName);
-                            }
                             instances.getAndIncrement();
                         }
                         super.visitInsn(opcode);

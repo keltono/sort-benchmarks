@@ -50,7 +50,7 @@ public class MutateMain {
         }
         System.out.println(totalMap);
         System.out.println(sum);
-        /*for(String s : instanceMap.keySet()) {
+        for(String s : instanceMap.keySet()) {
             long exceptions = 0;
             for(Mutator m : instanceMap.get(s).keySet()) {
                 if(instanceMap.get(s).get(m) > 0) {
@@ -73,7 +73,7 @@ public class MutateMain {
                 System.out.println("Tested " + instanceMap.get(s).get(m) + " of type " + m);
             }
             System.out.println("Caught " + exceptions + " exceptions in class " + s);
-        }*/
+        }
     }
 
     public static URL[] stringsToUrls(String[] paths) throws MalformedURLException {
