@@ -46,7 +46,7 @@
             <plugin>
                 <groupId>org.pitest</groupId>
                 <artifactId>pitest-maven</artifactId>
-                <version>1.5.2</version>
+                <version>1.6.0-SNAPSHOT</version> <!--1.5.2-->
                 <configuration>
                     <targetClasses>
                         <param>${target}*</param>
@@ -55,7 +55,8 @@
                         <param>${test}</param>
                     </targetTests>
                     <mutators>
-                        <mutator>STRONGER</mutator>
+                        <mutator>DEFAULTS</mutator>
+                        <!--mutator>NULL_RETURNS</mutator-->
                     </mutators>
                     <timestampedReports>false</timestampedReports>
                 </configuration>

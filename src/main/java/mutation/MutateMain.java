@@ -33,17 +33,17 @@ public class MutateMain {
         Map<String, Map<Mutator, Long>> instanceMap = counter.getMutationInstances();
         Map<Mutator, Long> totalMap = new HashMap<>();
         long sum = 0;
-        for(Mutator m : Mutator.values()) {
+        /*for(Mutator m : Mutator.values()) {
             totalMap.put(m, 0L);
-        }
-        for(int c = 44; c < 60; c++) {
+        }*/
+        for(int c = 0; c < 32; c++) {
             totalMap.put(Mutator.values()[c], 0L);
         }
         for(String s : instanceMap.keySet()) {
             /*for(Mutator m : instanceMap.get(s).keySet()) {
                 totalMap.put(m, instanceMap.get(s).get(m) + totalMap.get(m));
             }*/
-            for(int c = 44; c < 60; c++) {
+            for(int c = 0; c < 32; c++) {
                 totalMap.put(Mutator.values()[c], instanceMap.get(s).get(Mutator.values()[c]) + totalMap.get(Mutator.values()[c]));
                 sum += instanceMap.get(s).get(Mutator.values()[c]);
             }
@@ -59,6 +59,7 @@ public class MutateMain {
                 for(int c = 0; c < instanceMap.get(s).get(m); c++) {
                     SeparatedMutationClassLoader smcl = new SeparatedMutationClassLoader(new File(s).toURI().toURL(), m, c, s);
                     try {
+                        System.out.println(runFiles);
                         for(String f : runFiles) {
                             Method[] methods = smcl.findClass(s).getMethods();
                             for(Method md : methods) {

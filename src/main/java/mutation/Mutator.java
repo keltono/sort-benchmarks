@@ -87,8 +87,12 @@ public enum Mutator {
             new InstructionCall(Opcodes.ARETURN)),
     //Swap increments (INCREMENTS):
     IINC_SWAP(Opcodes.IINC, null, new InstructionCall(Opcodes.NOP)), //More symbolic
-    //Remove void calls (VOID_METHOD_CALLS) //TODO could be a different invoke
-    VOID_REMOVE(Opcodes.INVOKESTATIC, "V", new InstructionCall(Opcodes.NOP)),
+    //Remove void calls (VOID_METHOD_CALLS)
+    VOID_REMOVE_STATIC(Opcodes.INVOKESTATIC, "V", new InstructionCall(Opcodes.NOP)),
+    //VOID_REMOVE_DYNAMIC(Opcodes.INVOKEDYNAMIC, "V", new InstructionCall(Opcodes.NOP)), //here be dragons; don't!
+    VOID_REMOVE_VIRTUAL(Opcodes.INVOKEVIRTUAL, "V", new InstructionCall(Opcodes.NOP)),
+    VOID_REMOVE_INTERFACE(Opcodes.INVOKEINTERFACE, "V", new InstructionCall(Opcodes.NOP)),
+    //VOID_REMOVE_SPECIAL(Opcodes.INVOKESPECIAL, "V", new InstructionCall(Opcodes.NOP)), //initialization; don't worry about it
     //Return empty object (EMPTY_RETURNS)
     I_ARETURN_TO_EMPTY(Opcodes.ARETURN, "Ljava/lang/Integer;", new InstructionCall(Opcodes.POP),
             new InstructionCall(Opcodes.ICONST_0),
@@ -169,7 +173,7 @@ public enum Mutator {
     //TODO make immutable
     //TODO take argument of opcode + signature? to determine what is needed (for variable pops)
     public List<InstructionCall> replaceWith(String sig, boolean same) {
-        if(this == VOID_REMOVE) {
+        if(this.toString().contains("VOID_REMOVE")) {
             int args = (Type.getArgumentsAndReturnSizes(sig)) >> 2;
             if(same) {
                 args = args - 1;
