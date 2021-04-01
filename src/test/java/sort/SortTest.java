@@ -5,8 +5,10 @@ import com.pholser.junit.quickcheck.generator.InRange;
 import com.pholser.junit.quickcheck.generator.Size;
 import edu.berkeley.cs.jqf.fuzz.Fuzz;
 import edu.berkeley.cs.jqf.fuzz.JQF;
+import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.hamcrest.Matchers.lessThanOrEqualTo;
@@ -86,6 +88,30 @@ public class SortTest {
     @Fuzz(repro=DEFAULT_CORPUS_DIRECTORY)
     public void testTimSort(@Size(max=MAX_SIZE) List<@InRange(minInt=MIN_ELEMENT, maxInt=MAX_ELEMENT) Integer> input) {
         testSort(new TimSort(), input);
+    }
+
+    @Test
+    public void testSomeSorts() {
+        List<Integer> list = new ArrayList<>();
+        list.add(5);
+        list.add(2);
+        list.add(3);
+        testSort(new BubbleSort(), list);
+        /*System.out.println("\nStarting a Test!\n");
+        List<Integer> output = (new BubbleSort()).sort(list);
+        int n = list.size();
+        // Check length
+        assertEquals("Length should match",
+                n, output.size());
+        // Check integrity
+        for(Integer x : list) {
+            assertTrue("Output should contain same elements as input",
+                    output.contains(x));
+        }
+        // Check sortedness
+        for (int i = 0; i < n-1; i++) {
+            assertTrue(output.get(i) < output.get(i+1));
+        }*/
     }
 
     public static <T extends Comparable<T>> void testSort(SortAlgorithm algorithm, List<T> input) {

@@ -26,6 +26,12 @@
             <artifactId>asm</artifactId>
             <version>9.0</version>
         </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.12</version>
+            <scope>compile</scope>
+        </dependency>
     </dependencies>
 
     <build>
@@ -41,7 +47,7 @@
             <plugin>
                 <groupId>edu.berkeley.cs.jqf</groupId>
                 <artifactId>jqf-maven-plugin</artifactId>
-                <version>1.6</version>
+                <version>1.7-SNAPSHOT</version>
             </plugin>
             <plugin>
                 <groupId>org.pitest</groupId>
