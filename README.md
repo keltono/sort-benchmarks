@@ -59,4 +59,4 @@ The parameter `-Dtest` gives the name of a test class to run. Annoyingly, PIT do
 
 The parameter `-Dtarget` gives a wildcard pattern for the classes to perform mutations on; that is, the application classes. Here, `sort.*Sort` will match all the implementations of various sorting algorithms such as `sort.QuickSort` and `sort.TimSort`. The more classes that match this pattern, the more number of mutations PIT will perform, and the longer mutation analysis will take to run.
 
-Results should be in `target/pitest/index.html`. 
+Results should be in `target/pit-reports/index.html`. 
