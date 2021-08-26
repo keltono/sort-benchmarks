@@ -1,6 +1,5 @@
 package sort;
 
-import com.pholser.junit.quickcheck.Property;
 import com.pholser.junit.quickcheck.generator.InRange;
 import com.pholser.junit.quickcheck.generator.Size;
 import edu.berkeley.cs.jqf.fuzz.Fuzz;
@@ -9,6 +8,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static org.hamcrest.Matchers.lessThanOrEqualTo;
@@ -21,71 +21,67 @@ public class SortTest {
     protected static final int MIN_ELEMENT = 0;
     protected static final int MAX_ELEMENT = 10;
 
-    // The directory containing the fuzzer-saved inputs to replay when running with `mvn test` or the PIT plugin
-    // the `repro` setting in @Fuzz is ignored when running JQF, so it won't affect fuzzing
-    protected static final String DEFAULT_CORPUS_DIRECTORY = "target/fuzz-results/corpus";
-
-    @Fuzz(repro=DEFAULT_CORPUS_DIRECTORY)
+    @Fuzz
     public void testBubbleSort(@Size(max=MAX_SIZE) List<@InRange(minInt=MIN_ELEMENT, maxInt=MAX_ELEMENT) Integer> input) {
         testSort(new BubbleSort(), input);
     }
 
-    @Fuzz(repro=DEFAULT_CORPUS_DIRECTORY)
+    @Fuzz
     public void testCocktailShakerSort(@Size(max=MAX_SIZE) List<@InRange(minInt=MIN_ELEMENT, maxInt=MAX_ELEMENT) Integer> input) {
         testSort(new CocktailShakerSort(), input);
     }
 
-    @Fuzz(repro=DEFAULT_CORPUS_DIRECTORY)
+    @Fuzz
     public void testCombSort(@Size(max=MAX_SIZE) List<@InRange(minInt=MIN_ELEMENT, maxInt=MAX_ELEMENT) Integer> input) {
         testSort(new CombSort(), input);
     }
 
-    @Fuzz(repro=DEFAULT_CORPUS_DIRECTORY)
+    @Fuzz
     public void testCycleSort(@Size(max=MAX_SIZE) List<@InRange(minInt=MIN_ELEMENT, maxInt=MAX_ELEMENT) Integer> input) {
         testSort(new CycleSort(), input);
     }
 
-    @Fuzz(repro=DEFAULT_CORPUS_DIRECTORY)
+    @Fuzz
     public void testGnomeSort(@Size(max=MAX_SIZE) List<@InRange(minInt=MIN_ELEMENT, maxInt=MAX_ELEMENT) Integer> input) {
         testSort(new GnomeSort(), input);
     }
 
-    @Fuzz(repro=DEFAULT_CORPUS_DIRECTORY)
+    @Fuzz
     public void testHeapSort(@Size(max=MAX_SIZE) List<@InRange(minInt=MIN_ELEMENT, maxInt=MAX_ELEMENT) Integer> input) {
         testSort(new HeapSort(), input);
     }
 
-    @Fuzz(repro=DEFAULT_CORPUS_DIRECTORY)
+    @Fuzz
     public void testInsertionSort(@Size(max=MAX_SIZE) List<@InRange(minInt=MIN_ELEMENT, maxInt=MAX_ELEMENT) Integer> input) {
         testSort(new InsertionSort(), input);
     }
 
-    @Fuzz(repro=DEFAULT_CORPUS_DIRECTORY)
+    @Fuzz
     public void testMergeSort(@Size(max=MAX_SIZE) List<@InRange(minInt=MIN_ELEMENT, maxInt=MAX_ELEMENT) Integer> input) {
         testSort(new MergeSort(), input);
     }
 
-    @Fuzz(repro=DEFAULT_CORPUS_DIRECTORY)
+    @Fuzz
     public void testPancakeSort(@Size(max=MAX_SIZE) List<@InRange(minInt=MIN_ELEMENT, maxInt=MAX_ELEMENT) Integer> input) {
         testSort(new PancakeSort(), input);
     }
 
-    @Fuzz(repro=DEFAULT_CORPUS_DIRECTORY)
+    @Fuzz
     public void testQuickSort(@Size(max=MAX_SIZE) List<@InRange(minInt=MIN_ELEMENT, maxInt=MAX_ELEMENT) Integer> input) {
         testSort(new QuickSort(), input);
     }
 
-    @Fuzz(repro=DEFAULT_CORPUS_DIRECTORY)
+    @Fuzz
     public void testSelectionSort(@Size(max=MAX_SIZE) List<@InRange(minInt=MIN_ELEMENT, maxInt=MAX_ELEMENT) Integer> input) {
         testSort(new SelectionSort(), input);
     }
 
-    @Fuzz(repro=DEFAULT_CORPUS_DIRECTORY)
+    @Fuzz
     public void testShellSort(@Size(max=MAX_SIZE) List<@InRange(minInt=MIN_ELEMENT, maxInt=MAX_ELEMENT) Integer> input) {
         testSort(new ShellSort(), input);
     }
 
-    @Fuzz(repro=DEFAULT_CORPUS_DIRECTORY)
+    @Fuzz
     public void testTimSort(@Size(max=MAX_SIZE) List<@InRange(minInt=MIN_ELEMENT, maxInt=MAX_ELEMENT) Integer> input) {
         testSort(new TimSort(), input);
     }
@@ -241,5 +237,9 @@ public class SortTest {
         for (int i = 0; i < n-1; i++) {
             assertThat(output.get(i), lessThanOrEqualTo(output.get(i+1)));
         }
+    }
+
+    public static <T extends Comparable<T>> void testSort(SortAlgorithm algorithm, T... input) {
+        testSort(algorithm, Arrays.asList(input));
     }
 }
