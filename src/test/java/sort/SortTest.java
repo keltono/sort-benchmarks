@@ -27,6 +27,14 @@ public class SortTest {
     }
 
     @Fuzz
+    public void fuzzBubbleSort(@Size(max=MAX_SIZE) List<@InRange(minInt=MIN_ELEMENT, maxInt=MAX_ELEMENT) Integer> input) {
+        List<Integer> l1 = new BubbleSort().sort(input);
+        input.sort(Integer::compareTo);
+        assertEquals(l1, input);
+        //this can kill 18 where testBubbleSort kills 24 - why?
+    }
+
+    @Fuzz
     public void testCocktailShakerSort(@Size(max=MAX_SIZE) List<@InRange(minInt=MIN_ELEMENT, maxInt=MAX_ELEMENT) Integer> input) {
         testSort(new CocktailShakerSort(), input);
     }
@@ -86,7 +94,7 @@ public class SortTest {
         testSort(new TimSort(), input);
     }
 
-    @Test
+    /*@Test
     public void testSomeSortsNoFuzz() {
         List<Integer> list = new ArrayList<>();
         list.add(5);
@@ -219,11 +227,12 @@ public class SortTest {
         list.add(2);
         list.add(3);
         testSort(new TimSort(), list);
-    }
+    }*/
 
     public static <T extends Comparable<T>> void testSort(SortAlgorithm algorithm, List<T> input) {
         //System.out.println("\nStarting a Test!\n");
         List<T> output = algorithm.sort(input);
+        //System.out.println("output: " + output);
         int n = input.size();
         // Check length
         assertEquals("Length should match",

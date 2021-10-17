@@ -28,7 +28,7 @@ import java.util.*;
  * questions.
  */
 
-class TimSort implements SortAlgorithm {
+public class TimSort implements SortAlgorithm {
 
     public <T extends Comparable<T>> T[] sort(T[] x) {
         ComparableTimSort.sort(x, 0, x.length,null, 0, 0);
