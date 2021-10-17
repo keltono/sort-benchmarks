@@ -12,6 +12,7 @@ import sort.TimSort;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.junit.Assert.assertEquals;
 import static sort.SortTest.testSort;
 
 @RunWith(Mu2.class)
@@ -41,6 +42,16 @@ public class DiffTest {
     @Diff(cmp = "noncompare")
     public List<Integer> otherTimSort(@Size(max=MAX_SIZE) List<@InRange(minInt=MIN_ELEMENT, maxInt=MAX_ELEMENT) Integer> input) {
         testSort(new TimSort(), input);
+        return null;
+    }
+
+    @Diff(cmp = "noncompare")
+    public List<Integer> equalsTimSort(@Size(max=MAX_SIZE) List<@InRange(minInt=MIN_ELEMENT, maxInt=MAX_ELEMENT) Integer> input) {
+        List<Integer> lst = new TimSort().sort(input);
+        List<Integer> sorted = new ArrayList<>();
+        sorted.addAll(input);
+        sorted.sort(Integer::compareTo);
+        assertEquals(lst, sorted);
         return null;
     }
 
