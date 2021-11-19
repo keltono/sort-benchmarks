@@ -27,6 +27,14 @@ public class SortTest {
     }
 
     @Fuzz
+    public void fuzzBubbleSort(@Size(max=MAX_SIZE) List<@InRange(minInt=MIN_ELEMENT, maxInt=MAX_ELEMENT) Integer> input) {
+        List<Integer> l1 = new BubbleSort().sort(input);
+        input.sort(Integer::compareTo);
+        assertEquals(l1, input);
+        //this can kill 18 where testBubbleSort kills 24 - why?
+    }
+
+    @Fuzz
     public void testCocktailShakerSort(@Size(max=MAX_SIZE) List<@InRange(minInt=MIN_ELEMENT, maxInt=MAX_ELEMENT) Integer> input) {
         testSort(new CocktailShakerSort(), input);
     }
@@ -86,143 +94,7 @@ public class SortTest {
         testSort(new TimSort(), input);
     }
 
-    @Test
-    public void testSomeSortsNoFuzz() {
-        List<Integer> list = new ArrayList<>();
-        list.add(5);
-        list.add(2);
-        list.add(3);
-        testSort(new BubbleSort(), list);
-        testSort(new CocktailShakerSort(), list);
-        testSort(new GnomeSort(), list);
-        testSort(new HeapSort(), list);
-        testSort(new InsertionSort(), list);
-        testSort(new MergeSort(), list);
-        testSort(new PancakeSort(), list);
-        testSort(new SelectionSort(), list);
-        testSort(new ShellSort(), list);
-        testSort(new TimSort(), list);
-    }
-
-    @Test
-    public void testBubbleSortNoFuzz() {
-        List<Integer> list = new ArrayList<>();
-        list.add(5);
-        list.add(2);
-        list.add(3);
-        testSort(new BubbleSort(), list);
-    }
-
-    @Test
-    public void testCocktailShakerSortNoFuzz() {
-        List<Integer> list = new ArrayList<>();
-        list.add(5);
-        list.add(2);
-        list.add(3);
-        testSort(new CocktailShakerSort(), list);
-    }
-
-    @Test
-    public void testCombSortNoFuzz() { //did not end
-        List<Integer> list = new ArrayList<>();
-        list.add(5);
-        list.add(2);
-        list.add(3);
-        testSort(new CombSort(), list);
-    }
-
-    @Test
-    public void testCycleSortNoFuzz() { //did not end
-        List<Integer> list = new ArrayList<>();
-        list.add(5);
-        list.add(2);
-        list.add(3);
-        testSort(new CycleSort(), list);
-    }
-
-    @Test
-    public void testGnomeSortNoFuzz() {
-        List<Integer> list = new ArrayList<>();
-        list.add(5);
-        list.add(2);
-        list.add(3);
-        testSort(new GnomeSort(), list);
-    }
-
-    @Test
-    public void testHeapSortNoFuzz() {
-        List<Integer> list = new ArrayList<>();
-        list.add(5);
-        list.add(2);
-        list.add(3);
-        testSort(new HeapSort(), list);
-    }
-
-    @Test
-    public void testInsertionSortNoFuzz() {
-        List<Integer> list = new ArrayList<>();
-        list.add(5);
-        list.add(2);
-        list.add(3);
-        testSort(new InsertionSort(), list);
-    }
-
-    @Test
-    public void testMergeSortNoFuzz() {
-        List<Integer> list = new ArrayList<>();
-        list.add(5);
-        list.add(2);
-        list.add(3);
-        testSort(new MergeSort(), list);
-    }
-
-    @Test
-    public void testPancakeSortNoFuzz() {
-        List<Integer> list = new ArrayList<>();
-        list.add(5);
-        list.add(2);
-        list.add(3);
-        testSort(new PancakeSort(), list);
-    }
-
-    @Test
-    public void testQuickSortNoFuzz() { //did not end
-        List<Integer> list = new ArrayList<>();
-        list.add(5);
-        list.add(2);
-        list.add(3);
-        testSort(new QuickSort(), list);
-    }
-
-    @Test
-    public void testSelectionSortNoFuzz() {
-        List<Integer> list = new ArrayList<>();
-        list.add(5);
-        list.add(2);
-        list.add(3);
-        testSort(new SelectionSort(), list);
-    }
-
-    @Test
-    public void testShellSortNoFuzz() {
-        List<Integer> list = new ArrayList<>();
-        list.add(5);
-        list.add(2);
-        list.add(3);
-        testSort(new ShellSort(), list);
-    }
-
-    @Test
-    public void testTimSortNoFuzz() {
-        List<Integer> list = new ArrayList<>();
-        list.add(5);
-        list.add(2);
-        list.add(3);
-        testSort(new TimSort(), list);
-    }
-
     public static <T extends Comparable<T>> void testSort(SortAlgorithm algorithm, List<T> input) {
-        //System.out.println("\nStarting a Test!\n");
         List<T> output = algorithm.sort(input);
         int n = input.size();
         // Check length
