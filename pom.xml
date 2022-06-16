@@ -96,5 +96,18 @@
         </plugins>
     </build>
 
+    <scm>
+        <connection>scm:git:git@github.com:cmu-pasta/sort-benchmarks</connection>
+        <url>https://github.com/cmu-pasta/sort-benchmarks</url>
+      <tag>HEAD</tag>
+    </scm>
+
+    <distributionManagement>
+       <repository>
+         <id>github</id>
+         <name>GitHub Packages</name>
+         <url>https://maven.pkg.github.com/cmu-pasta/sort-benchmarks</url>
+       </repository>
+    </distributionManagement>
 
 </project>
