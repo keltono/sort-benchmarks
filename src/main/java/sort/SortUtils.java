@@ -8,7 +8,7 @@ import java.util.List;
  *
  * @author Podshivalov Nikita (https://github.com/nikitap492)
  */
-final class SortUtils {
+public final class SortUtils {
 
   /**
    * Helper method for swapping places in array
@@ -17,7 +17,7 @@ final class SortUtils {
    * @param idx index of the first element
    * @param idy index of the second element
    */
-  static <T> boolean swap(T[] array, int idx, int idy) {
+  public static <T> boolean swap(T[] array, int idx, int idy) {
     T swap = array[idx];
     array[idx] = array[idy];
     array[idy] = swap;
@@ -42,7 +42,7 @@ final class SortUtils {
    * @param w second element
    * @return true if the first element is greater than the second element
    */
-  static <T extends Comparable<T>> boolean greater(T v, T w) {
+  public static <T extends Comparable<T>> boolean greater(T v, T w) {
     return v.compareTo(w) > 0;
   }
 

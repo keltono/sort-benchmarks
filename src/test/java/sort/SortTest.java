@@ -4,6 +4,8 @@ import com.pholser.junit.quickcheck.generator.InRange;
 import com.pholser.junit.quickcheck.generator.Size;
 import edu.berkeley.cs.jqf.fuzz.Fuzz;
 import edu.berkeley.cs.jqf.fuzz.JQF;
+import edu.columbia.cs.psl.phosphor.runtime.MultiTainter;
+import edu.columbia.cs.psl.phosphor.runtime.Taint;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -24,6 +26,9 @@ public class SortTest {
     @Fuzz
     public void testBubbleSort(@Size(max=MAX_SIZE) List<@InRange(minInt=MIN_ELEMENT, maxInt=MAX_ELEMENT) Integer> input) {
         testSort(new BubbleSort(), input);
+       // Taint t = MultiTainter.getTaint(input);
+        //assert t != null;
+        //System.out.println(t);
     }
 
     @Fuzz

@@ -1,6 +1,8 @@
 package sort;
 
 import static sort.SortUtils.*;
+import edu.columbia.cs.psl.phosphor.runtime.MultiTainter;
+
 
 /**
  * @author Varun Upadhyay (https://github.com/varunu28)
@@ -20,7 +22,7 @@ public class BubbleSort implements SortAlgorithm {
       boolean swapped = false;
       for (int j = 0; j < size - 1 - i; ++j) {
         if (greater(array[j], array[j + 1])) {
-          swap(array, j, j + 1);
+          swap(array, j, j+1);
           swapped = true;
         }
       }
